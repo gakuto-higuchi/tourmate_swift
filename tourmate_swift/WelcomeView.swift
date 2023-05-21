@@ -8,43 +8,73 @@
 import SwiftUI
 
 struct Welcomeview: View {
+//    @State private var path: [Route] = []
+    @State private var path: NavigationPath = NavigationPath()
     var body: some View {
-        VStack {
-            VStack(alignment: .leading) {
+        
+        NavigationStack(path: $path) {
+            VStack {
+                VStack(alignment: .leading) {
+                    Spacer()
+                    Text("TourMate")
+                        .font(.system(size: 72, weight: .bold, design: .default))
+                        .italic()
+                        .foregroundColor(.white)
+                        .padding(.leading, 6)
+                }
+                .frame(maxWidth: .infinity, maxHeight: 370, alignment: .bottomLeading)
+                .background(Color.purpleCustom)
+                
                 Spacer()
-                Text("TourMate")
-                    .font(.system(size: 65, weight: .bold, design: .default))
-                    .foregroundColor(.white)
-                    .padding(.leading, 6)
+                    .frame(height: 70)
+                
+//                    Button {
+//                        path = [
+//                            Route.SignUp]
+//                    } label: {
+//                        Text("メールアドレスで登録する")
+//                            .font(.system(size: 20, weight: .bold))
+//                            .foregroundColor(.white)
+//                    }
+//                    .padding(7)
+//                    .background(Color.pinkCustom)
+//                    .cornerRadius(20)
+//                    .navigationDestination(for: Route.self) { Route in
+//                        switch Route {
+//                        case .SignUp:
+//                            SignUpView()
+//                        case .Welcome:
+//                            Welcomeview()
+//                        }
+//                    }
+                Button{
+                    path.append(Route.SignUp)
+                }label: {
+                    Text("メールアドレスで登録する")
+                        .font(.system(size: 20, weight: .bold))
+                        .foregroundColor(.white)
+                }
+                .padding(7)
+                .background(Color.pinkCustom)
+                .cornerRadius(20)
+                .navigationDestination(for: Route.self) { destination in
+                    
+                    SignUpView()
+                }
+                    LoginContainer() // ダミーのビュー
+                        .padding(.bottom, 160)
+                
+                Button(action: {}) {
+                    Text("利用することで利用規約・プライバシーポリシーに同意したものとします。")
+                        .font(.system(size: 10))
+                        .foregroundColor(.white)
+                }
+                .frame(width: 225, height: 160, alignment: .bottom)
             }
-            .frame(maxWidth: .infinity, maxHeight: 370, alignment: .bottomLeading)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color.purpleCustom)
-
-            Spacer()
-                .frame(height: 70)
-
-            SigninContainer() // ダミーのビュー
-                .padding(.bottom, 20)
-
-            LoginContainer() // ダミーのビュー
-                .padding(.bottom, 160)
-
-            Button(action: {}) {
-                Text("利用することで利用規約・プライバシーポリシーに同意したものとします。")
-                    .font(.system(size: 10))
-                    .foregroundColor(.white)
-            }
-            .frame(width: 225, height: 160, alignment: .bottom)
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color.purpleCustom)
         .edgesIgnoringSafeArea(.all)
-    }
-}
-
-struct SigninContainer: View { // ダミーのビュー
-    var body: some View {
-        Text("SigninContainer")
+        }
     }
 }
 
