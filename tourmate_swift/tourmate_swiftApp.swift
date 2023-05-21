@@ -25,6 +25,7 @@ struct tourmate_swiftApp: App {
   var body: some Scene {
     WindowGroup {
         Welcomeview()
+            .environmentObject(AppEnvironment())
     }
   }
 }
