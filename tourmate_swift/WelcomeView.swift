@@ -9,10 +9,10 @@ import SwiftUI
 
 struct Welcomeview: View {
 //    @State private var path: [Route] = []
-    @State private var path: NavigationPath = NavigationPath()
+    @EnvironmentObject var appEnvironment: AppEnvironment
     var body: some View {
         
-        NavigationStack(path: $path) {
+        NavigationStack(path: $appEnvironment.path) {
             VStack {
                 VStack(alignment: .leading) {
                     Spacer()
@@ -48,13 +48,13 @@ struct Welcomeview: View {
 //                        }
 //                    }
                 Button{
-                    path.append(Route.SignUp)
+                    appEnvironment.path.append(Route.SignUp)
                 }label: {
                     Text("メールアドレスで登録する")
                         .font(.system(size: 20, weight: .bold))
                         .foregroundColor(.white)
                 }
-                .padding(7)
+                .padding(13)
                 .background(Color.pinkCustom)
                 .cornerRadius(20)
                 .navigationDestination(for: Route.self) { destination in
@@ -80,12 +80,15 @@ struct Welcomeview: View {
 
 struct LoginContainer: View { // ダミーのビュー
     var body: some View {
-        Text("LoginContainer")
+        Text("ログイン")
+            .fontWeight(.bold)
+            .padding(10)
     }
 }
 
 struct WelcomeView_Previews: PreviewProvider {
     static var previews: some View {
         Welcomeview()
+            .environmentObject(AppEnvironment())
     }
 }
