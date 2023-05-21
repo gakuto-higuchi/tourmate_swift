@@ -12,3 +12,12 @@ enum Route: Hashable {
     case Welcome
     case SignUp
 }
+
+//class AppEnvironment: ObservableObject {
+//    @Published var path: NavigationPath = NavigationPath()
+//}
+
+class AppEnvironment: ObservableObject {
+    @Published var path: [Route] = []
+    
+}
