@@ -1,0 +1,6 @@
+framework module Pods_tourmate_swift_tourmate_swiftUITests {
+  umbrella header "Pods-tourmate_swift-tourmate_swiftUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
