@@ -89,4 +89,5 @@ struct SignUpView: View {
                 .environmentObject(AppEnvironment())
             
         }
-    }}
+    }
+}
