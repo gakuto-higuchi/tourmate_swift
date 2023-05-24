@@ -13,6 +13,7 @@ import FirebaseCore
 import FirebaseFirestore
 
 struct UserNameView: View {
+    @EnvironmentObject var appEnvironment: AppEnvironment
     @State private var infoText: String = ""
     @State private var userName: String = ""
     @State private var email: String = ""
@@ -31,7 +32,7 @@ struct UserNameView: View {
                     TextField("ユーザーネーム", text: $userName)
                         .multilineTextAlignment(.center)
                         .padding()
-                        .background(Color.gray.opacity(0.2))
+                        .background(Color.gray.opacity(0.3))
                         .cornerRadius(10.0)
                         .padding(.bottom, 20)
                     Text(infoText).padding(.all, 8)
@@ -52,19 +53,19 @@ struct UserNameView: View {
     }
 
     private func saveUserName() {
-        guard let userId = Auth.auth().currentUser?.uid else {
-            return
-        }
+        guard let user = Auth.auth().currentUser else {return}
         let db = Firestore.firestore()
-        db.collection("users").document(userId).setData([
+        db.collection("users").document(user.uid).setData([
             "user_name": userName,
-            "email": email,
             "time": Date()
-        ], merge: true) { err in
+        ]) { err in
             if let err = err {
                 infoText = "Error writing document: \(err)"
             } else {
                 // Navigate to the next screen
+                DispatchQueue.main.async {
+                    appEnvironment.path.append(Route.ProfileImage)
+                }
             }
         }
     }
@@ -73,5 +74,6 @@ struct UserNameView: View {
 struct UserNameView_Previews: PreviewProvider {
     static var previews: some View {
         UserNameView()
+            .environmentObject(AppEnvironment())
     }
 }

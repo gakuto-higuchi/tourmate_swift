@@ -65,6 +65,8 @@ struct Welcomeview: View {
                         UserNameView()
                     case .Welcome:
                         Welcomeview()
+                    case .ProfileImage:
+                        ProfileImageView()
                     }
                 }
                 LoginContainer() // ダミーのビュー
