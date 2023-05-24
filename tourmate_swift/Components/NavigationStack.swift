@@ -12,6 +12,7 @@ enum Route: Hashable {
     case Welcome
     case SignUp
     case UserName
+    case ProfileImage
 }
 
 //class AppEnvironment: ObservableObject {
