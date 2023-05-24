@@ -14,7 +14,7 @@ struct SignUpView: View {
     @State private var infoText: String = ""
     
     var body: some View {
-        VStack() {
+        VStack {
             Text("とうろくする？")
                 .font(.system(size: 40))
                 .fontWeight(.bold)
@@ -35,6 +35,10 @@ struct SignUpView: View {
                     .padding(.bottom, 20)
             }
             .padding(.horizontal,25)
+            if !infoText.isEmpty {
+                Text(infoText)
+                    .foregroundColor(.red)
+            }
             HStack{
                 
                 Button{
@@ -60,14 +64,10 @@ struct SignUpView: View {
                         .cornerRadius(15)
                 }
             }
+            
             .padding(.horizontal)
             .padding(.bottom,130)
-            
-            if !infoText.isEmpty {
-                Text(infoText)
-                    .foregroundColor(.red)
-                    .padding(.top, 20)
-            }
+
         }
         .edgesIgnoringSafeArea(.all)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -78,16 +78,21 @@ struct SignUpView: View {
         Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
             if let e = error {
                 self.infoText = "登録に失敗しました: \(e.localizedDescription)"
+            }else {
+                DispatchQueue.main.async {
+                    appEnvironment.path.append(Route.UserName)
+                }
             }
+            
         }
         
     }
-    
-    struct SignUp_Previews: PreviewProvider {
-        static var previews: some View {
-            SignUpView()
-                .environmentObject(AppEnvironment())
-            
-        }
+}
+struct SignUp_Previews: PreviewProvider {
+    static var previews: some View {
+        SignUpView()
+            .environmentObject(AppEnvironment())
+        
     }
 }
+

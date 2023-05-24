@@ -11,6 +11,7 @@ import SwiftUI
 enum Route: Hashable {
     case Welcome
     case SignUp
+    case UserName
 }
 
 //class AppEnvironment: ObservableObject {
@@ -19,5 +20,5 @@ enum Route: Hashable {
 
 class AppEnvironment: ObservableObject {
     @Published var path: [Route] = []
-    
+
 }

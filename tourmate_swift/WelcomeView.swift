@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct Welcomeview: View {
-//    @State private var path: [Route] = []
+    //    @State private var path: [Route] = []
     @EnvironmentObject var appEnvironment: AppEnvironment
     var body: some View {
         
@@ -28,25 +28,25 @@ struct Welcomeview: View {
                 Spacer()
                     .frame(height: 70)
                 
-//                    Button {
-//                        path = [
-//                            Route.SignUp]
-//                    } label: {
-//                        Text("メールアドレスで登録する")
-//                            .font(.system(size: 20, weight: .bold))
-//                            .foregroundColor(.white)
-//                    }
-//                    .padding(7)
-//                    .background(Color.pinkCustom)
-//                    .cornerRadius(20)
-//                    .navigationDestination(for: Route.self) { Route in
-//                        switch Route {
-//                        case .SignUp:
-//                            SignUpView()
-//                        case .Welcome:
-//                            Welcomeview()
-//                        }
-//                    }
+                //                    Button {
+                //                        path = [
+                //                            Route.SignUp]
+                //                    } label: {
+                //                        Text("メールアドレスで登録する")
+                //                            .font(.system(size: 20, weight: .bold))
+                //                            .foregroundColor(.white)
+                //                    }
+                //                    .padding(7)
+                //                    .background(Color.pinkCustom)
+                //                    .cornerRadius(20)
+                //                    .navigationDestination(for: Route.self) { Route in
+                //                        switch Route {
+                //                        case .SignUp:
+                //                            SignUpView()
+                //                        case .Welcome:
+                //                            Welcomeview()
+                //                        }
+                //                    }
                 Button{
                     appEnvironment.path.append(Route.SignUp)
                 }label: {
@@ -57,12 +57,18 @@ struct Welcomeview: View {
                 .padding(13)
                 .background(Color.pinkCustom)
                 .cornerRadius(20)
-                .navigationDestination(for: Route.self) { destination in
-                    
-                    SignUpView()
+                .navigationDestination(for: Route.self) { Route in
+                    switch Route {
+                    case .SignUp:
+                        SignUpView()
+                    case .UserName:
+                        UserNameView()
+                    case .Welcome:
+                        Welcomeview()
+                    }
                 }
-                    LoginContainer() // ダミーのビュー
-                        .padding(.bottom, 160)
+                LoginContainer() // ダミーのビュー
+                    .padding(.bottom, 160)
                 
                 Button(action: {}) {
                     Text("利用することで利用規約・プライバシーポリシーに同意したものとします。")
@@ -73,7 +79,7 @@ struct Welcomeview: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color.purpleCustom)
-        .edgesIgnoringSafeArea(.all)
+            .edgesIgnoringSafeArea(.all)
         }
     }
 }
@@ -85,7 +91,6 @@ struct LoginContainer: View { // ダミーのビュー
             .padding(10)
     }
 }
-
 struct WelcomeView_Previews: PreviewProvider {
     static var previews: some View {
         Welcomeview()
