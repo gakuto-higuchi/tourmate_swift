@@ -1,10 +1,3 @@
-//
-//  MapView.swift
-//  tourmate_swift
-//
-//  Created by gakutohiguchi on 2023/05/25.
-//
-
 import SwiftUI
 import MapKit
 
@@ -17,20 +10,24 @@ struct MapView: View {
     
     var body: some View {
         ZStack(alignment: .top) {
-            
+            Color.purpleCustom.edgesIgnoringSafeArea(.all)
             Map(coordinateRegion: $manager.region,
+                interactionModes: .all,
                 showsUserLocation: true,
                 userTrackingMode: $trackingMode)
-            .edgesIgnoringSafeArea(.all)
+            .edgesIgnoringSafeArea(.top)
+            
             VStack {
                 TextField("Search", text: $searchText, onCommit: {
                     search()
                 })
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
+                
                 Spacer()
+                
                 Button(action: {
-                    self.trackingMode = .follow
+                    trackingMode = MapUserTrackingMode.follow
                 }) {
                     Image(systemName: "globe")
                         .resizable()
@@ -40,6 +37,7 @@ struct MapView: View {
                         .foregroundColor(.pinkCustom)
                         .cornerRadius(10)
                 }
+                .padding(10)
             }
             
         }
@@ -56,7 +54,7 @@ struct MapView: View {
             if let item = response.mapItems.first {
                 let coordinate = item.placemark.coordinate
                 manager.region.center = coordinate
-                self.trackingMode = .none
+                trackingMode = MapUserTrackingMode.none
             }
         }
     }
