@@ -28,25 +28,6 @@ struct Welcomeview: View {
                 Spacer()
                     .frame(height: 70)
                 
-                //                    Button {
-                //                        path = [
-                //                            Route.SignUp]
-                //                    } label: {
-                //                        Text("メールアドレスで登録する")
-                //                            .font(.system(size: 20, weight: .bold))
-                //                            .foregroundColor(.white)
-                //                    }
-                //                    .padding(7)
-                //                    .background(Color.pinkCustom)
-                //                    .cornerRadius(20)
-                //                    .navigationDestination(for: Route.self) { Route in
-                //                        switch Route {
-                //                        case .SignUp:
-                //                            SignUpView()
-                //                        case .Welcome:
-                //                            Welcomeview()
-                //                        }
-                //                    }
                 Button{
                     appEnvironment.path.append(Route.SignUp)
                 }label: {
@@ -61,16 +42,24 @@ struct Welcomeview: View {
                     switch Route {
                     case .SignUp:
                         SignUpView()
+                    case .SignIn:
+                        SignInView()
                     case .UserName:
                         UserNameView()
                     case .Welcome:
                         Welcomeview()
                     case .ProfileImage:
                         ProfileImageView()
+                    case .Home:
+                        HomeView()
                     }
                 }
-                LoginContainer() // ダミーのビュー
-                    .padding(.bottom, 160)
+                Button(action:{ appEnvironment.path.append(Route.SignIn)}) {
+                    Text("ログイン")
+                        .fontWeight(.bold)
+                        .padding(10)
+                        .foregroundColor(.black)
+                }
                 
                 Button(action: {}) {
                     Text("利用することで利用規約・プライバシーポリシーに同意したものとします。")

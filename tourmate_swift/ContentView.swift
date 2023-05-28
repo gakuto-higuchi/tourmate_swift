@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 struct ContentView: View {
     var body: some View {
         VStack {
@@ -14,6 +15,11 @@ struct ContentView: View {
                 .imageScale(.large)
                 .foregroundColor(.accentColor)
             Text("Hello, world!")
+                .font(.title)
+                .fontWeight(.black)
+                .foregroundColor(Color.pink)
+                .multilineTextAlignment(.leading)
+                .padding(0.0)
         }
         .padding()
     }

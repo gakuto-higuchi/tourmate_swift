@@ -11,8 +11,10 @@ import SwiftUI
 enum Route: Hashable {
     case Welcome
     case SignUp
+    case SignIn
     case UserName
     case ProfileImage
+    case Home
 }
 
 //class AppEnvironment: ObservableObject {

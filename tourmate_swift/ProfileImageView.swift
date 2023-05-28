@@ -95,6 +95,10 @@ struct ProfileImageView: View {
                         } else {
                             infoText = "アイコンを変更しました"
                             // Navigate to the next screen
+                            DispatchQueue.main.async {
+                                appEnvironment.path.append(Route.Home)
+                            }
+                            
                         }
                     }
                 }
@@ -106,6 +110,7 @@ struct ProfileImageView: View {
 struct ProfileImageView_Previews: PreviewProvider {
     static var previews: some View {
         ProfileImageView()
+            .environmentObject(AppEnvironment())
     }
 }
 

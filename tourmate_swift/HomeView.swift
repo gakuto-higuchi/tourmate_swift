@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct HomeView: View {
+    @EnvironmentObject var appEnvironment: AppEnvironment
     @State private var selection = 0
     
     var body: some View {
@@ -65,6 +66,7 @@ struct ProfileView: View {
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
+            .environmentObject(AppEnvironment())
     }
 }
 
